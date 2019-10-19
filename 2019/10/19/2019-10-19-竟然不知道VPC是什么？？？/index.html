@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="最近公司在做将服务从现有的经典网络模式迁移到vpc上，而我竟然对vpc一点概念都没有，于是在网上一顿百度猛虎如。">
+<meta name="keywords" content="vpc,服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="竟然不知道VPC是什么？？？">
+<meta property="og:url" content="https:&#x2F;&#x2F;xiaofeiyihui.github.io&#x2F;2019&#x2F;10&#x2F;19&#x2F;2019-10-19-%E7%AB%9F%E7%84%B6%E4%B8%8D%E7%9F%A5%E9%81%93VPC%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%9F%EF%BC%9F&#x2F;index.html">
+<meta property="og:site_name" content="小飞一会">
+<meta property="og:description" content="最近公司在做将服务从现有的经典网络模式迁移到vpc上，而我竟然对vpc一点概念都没有，于是在网上一顿百度猛虎如。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;image.525.life&#x2F;FkKNhxICeHVWynZntonxLpW5VzLd">
+<meta property="og:image" content="http:&#x2F;&#x2F;image.525.life&#x2F;FubY6scXcrh4b2GTdwU7zx4solJ4">
+<meta property="og:updated_time" content="2019-10-19T08:55:51.276Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;image.525.life&#x2F;FkKNhxICeHVWynZntonxLpW5VzLd">
+
+<link rel="canonical" href="https://xiaofeiyihui.github.io/2019/10/19/2019-10-19-%E7%AB%9F%E7%84%B6%E4%B8%8D%E7%9F%A5%E9%81%93VPC%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%9F%EF%BC%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>竟然不知道VPC是什么？？？ | 小飞一会</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小飞一会</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一步一步往前走</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/xiaofeiyihui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xiaofeiyihui.github.io/2019/10/19/2019-10-19-%E7%AB%9F%E7%84%B6%E4%B8%8D%E7%9F%A5%E9%81%93VPC%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%9F%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+      <meta itemprop="name" content="Mr.Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小飞一会">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          竟然不知道VPC是什么？？？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-10-19 15:22:59 / 修改时间：16:55:51" itemprop="dateCreated datePublished" datetime="2019-10-19T15:22:59+08:00">2019-10-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近公司在做将服务从现有的经典网络模式迁移到vpc上，而我竟然对vpc一点概念都没有，于是在网上一顿百度猛虎如。</p>
+<a id="more"></a>
+
+<h2 id="vpc是什么"><a href="#vpc是什么" class="headerlink" title="vpc是什么"></a>vpc是什么</h2><p>VPC（Virtual Private Cloud）,又叫做私有/专有网络，是针对公有云的基础网络(经典网络)来定义的一种概念。是公有云上自定义的逻辑隔离网络空间，是一块可我们自定义的网络空间，与我们在数据中心运行的传统网络相似，托管在VPC内的是我们在私有云上的服务资源，如云主机、负载均衡、云数据库等。我们可以自定义网段划分、IP地址和路由策略等，并通过安全组和网络ACL等实现多层安全防护。同时也可以通过VPN或专线连通VPC与我们的数据中心，灵活部署混合云。</p>
+<h2 id="私有网络（VPC）与基础网络-经典网络-的区别"><a href="#私有网络（VPC）与基础网络-经典网络-的区别" class="headerlink" title="私有网络（VPC）与基础网络(经典网络)的区别"></a>私有网络（VPC）与基础网络(经典网络)的区别</h2><ul>
+<li>VPC：是在公有云上为用户建立一块逻辑隔离的虚拟网络空间。在VPC内，用户可以自由定义网段划分、IP地址和路由<br>  策略，安全可提供网络ACL及安全组的访问控制，因此，VPC有更高的灵活性和安全性。</li>
+<li>经典网络：公有云上所有用户共享公共网络资源池，用户之间未做逻辑隔离。用户的内网IP由系统统一分配，相同的<br>  内网IP无法分配给不同用户。</li>
+</ul>
+<h3 id="经典网络和VPC的架构对比图："><a href="#经典网络和VPC的架构对比图：" class="headerlink" title="经典网络和VPC的架构对比图："></a>经典网络和VPC的架构对比图：</h3><p><img src="http://image.525.life/FkKNhxICeHVWynZntonxLpW5VzLd" alt="alt text" title="经典网络和VPC的架构对比图1"><br><img src="http://image.525.life/FubY6scXcrh4b2GTdwU7zx4solJ4" alt="alt text" title="经典网络和VPC的架构对比图2"></p>
+<blockquote>
+<p>ps:如果把经典网络看成购买商品房的话，vpc就是购买地基，自己搭建房子。</p>
+</blockquote>
+<h3 id="区别总结如下："><a href="#区别总结如下：" class="headerlink" title="区别总结如下："></a>区别总结如下：</h3><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>基础网络</th>
+<th>私有网络(VPC)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户关联</td>
+<td>多用户共用</td>
+<td>用户私有</td>
+</tr>
+<tr>
+<td>网络划分</td>
+<td>不可划分</td>
+<td>用户自定义</td>
+</tr>
+<tr>
+<td>IP规则</td>
+<td>基础网络内唯一</td>
+<td>vpc内唯一，vpc间可重复</td>
+</tr>
+<tr>
+<td>IP分配</td>
+<td>随机分配，不可修改</td>
+<td>vpc内随机分配，可自定义</td>
+</tr>
+<tr>
+<td>互通规则</td>
+<td>账号内互通</td>
+<td>vpc内互通，vpc间间隔</td>
+</tr>
+</tbody></table>
+<h2 id="使用私有网络的好处"><a href="#使用私有网络的好处" class="headerlink" title="使用私有网络的好处"></a>使用私有网络的好处</h2><blockquote>
+<p>1.灵活部署：自定义网络划分、路由规则，配置实施立即生效 ;<br>2.安全隔离：100%逻辑隔离的网络空间，我的地盘听我的 ;<br>3.丰富接入：支持公网VPN接入和专线接入;<br>4.访问控制：精确到端口的网络控制，满足金融政企的安全要求;</p>
+</blockquote>
+<h2 id="VPC网络应用场景"><a href="#VPC网络应用场景" class="headerlink" title="VPC网络应用场景"></a>VPC网络应用场景</h2><p>安全网络：这个有点废话，就是让你的服务更加安全，vpc网络相比经典网络本来就更加安全</p>
+<p>混合云网络:比如经典网络与vpc的混合使用</p>
+<p>异地多活：比如服务器部署在华东、华北等</p>
+<ul>
+<li>参考资料：<a href="https://blog.csdn.net/shb_derek1/article/details/82687135" target="_blank" rel="noopener">https://blog.csdn.net/shb_derek1/article/details/82687135</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vpc/" rel="tag"># vpc</a>
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"># 服务器</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/13/2019-10-13-hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="next" title="git+hexo搭建博客">
+                  <i class="fa fa-chevron-left"></i> git+hexo搭建博客
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vpc是什么"><span class="nav-number">1.</span> <span class="nav-text">vpc是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私有网络（VPC）与基础网络-经典网络-的区别"><span class="nav-number">2.</span> <span class="nav-text">私有网络（VPC）与基础网络(经典网络)的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#经典网络和VPC的架构对比图："><span class="nav-number">2.1.</span> <span class="nav-text">经典网络和VPC的架构对比图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区别总结如下："><span class="nav-number">2.2.</span> <span class="nav-text">区别总结如下：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用私有网络的好处"><span class="nav-number">3.</span> <span class="nav-text">使用私有网络的好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VPC网络应用场景"><span class="nav-number">4.</span> <span class="nav-text">VPC网络应用场景</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Mr.Li"
+    src="/images/myAvatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Li</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script><script src="/js/bookmark.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
