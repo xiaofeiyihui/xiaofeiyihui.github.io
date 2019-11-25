@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="最近在看《我的第一本算法书》，准备写点数据结构与算法系列博客。看完后感觉加密算法也很有意思，于是就有了这篇文章。">
+<meta name="keywords" content="加密,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不可不知的加密算法">
+<meta property="og:url" content="https:&#x2F;&#x2F;xiaofeiyihui.github.io&#x2F;2019&#x2F;11&#x2F;25&#x2F;2019-11-25-%E4%B8%8D%E5%8F%AF%E4%B8%8D%E7%9F%A5%E7%9A%84%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95&#x2F;index.html">
+<meta property="og:site_name" content="小飞一会">
+<meta property="og:description" content="最近在看《我的第一本算法书》，准备写点数据结构与算法系列博客。看完后感觉加密算法也很有意思，于是就有了这篇文章。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;xiaofeiyihui.github.io&#x2F;2019&#x2F;11&#x2F;25&#x2F;images&#x2F;encryption&#x2F;1.png">
+<meta property="og:updated_time" content="2019-11-25T13:53:30.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;xiaofeiyihui.github.io&#x2F;2019&#x2F;11&#x2F;25&#x2F;images&#x2F;encryption&#x2F;1.png">
+
+<link rel="canonical" href="https://xiaofeiyihui.github.io/2019/11/25/2019-11-25-%E4%B8%8D%E5%8F%AF%E4%B8%8D%E7%9F%A5%E7%9A%84%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>不可不知的加密算法 | 小飞一会</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小飞一会</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一步一步往前走</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/xiaofeiyihui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xiaofeiyihui.github.io/2019/11/25/2019-11-25-%E4%B8%8D%E5%8F%AF%E4%B8%8D%E7%9F%A5%E7%9A%84%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+      <meta itemprop="name" content="Mr.Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小飞一会">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          不可不知的加密算法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-11-25 17:45:00 / 修改时间：21:53:30" itemprop="dateCreated datePublished" datetime="2019-11-25T17:45:00+08:00">2019-11-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8A%A0%E5%AF%86/" itemprop="url" rel="index">
+                    <span itemprop="name">加密</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近在看《我的第一本算法书》，准备写点数据结构与算法系列博客。看完后感觉加密算法也很有意思，于是就有了这篇文章。</p>
+<a id="more"></a>
+
+<h2 id="为什么需要加密"><a href="#为什么需要加密" class="headerlink" title="为什么需要加密"></a>为什么需要加密</h2><p> 互联网传输数据时面临着四个问题：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">窃听:A向B发送消息可能会在传输途中被X偷看;</span><br><span class="line">假冒:A以为向B发送了消息，然而B有可能是X冒充的；反过来，B以为从A那里收到了消息，然而也有可能是X冒充的;</span><br><span class="line">篡改:A向B发送消息，但是B收到的可能是X篡改后的;</span><br><span class="line">事后否认:B收到A发送的消息，但A可能对B带有恶意，不承认消息是自己发送的;</span><br></pre></td></tr></table></figure>
+<p> 要解决上述问题，很自然的就想到了对信息加密。<br> <img src="../images/encryption/1.png" alt="alt text" title="加密方案"></p>
+<h2 id="加密算法分类"><a href="#加密算法分类" class="headerlink" title="加密算法分类"></a>加密算法分类</h2><h3 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h3><p>哈希函数是把给定的数据转换成固定长度的无规律数值</p>
+<p><strong>哈希函数要求</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.输出的哈希值数据长度不变;</span><br><span class="line">2.输入数据相同，输出的哈希值也必定相同;</span><br><span class="line">3.输入的数据相似，但输出的哈希值也会有很大差异;</span><br><span class="line">4.输入数据不同，输出的哈希值可能相同(哈希冲突);</span><br><span class="line">5.不可能从哈希值反过来推算出原本数据;</span><br><span class="line">6.哈希值的计算相对容易;</span><br></pre></td></tr></table></figure>
+
+<p><strong>交互方式</strong></p>
+<p><code>A发送消息-&gt;B收到消息后使用哈希函数加密消息-&gt;B保存加密后消息-&gt;用于判断A下次的消息是否与上次一致；</code></p>
+<p><strong>优缺点</strong><br>加密内容不可逆，可以预防X获取落地数据。但是对没解决四个问题</p>
+<p><strong>应用场景</strong><br>MD5、SHA-1、SHA-2等，其中SHA-2应用更广，MD5、SHA-1存在安全隐患。可以用在如保存用户密码到服务器。</p>
+<h3 id="共享密钥加密"><a href="#共享密钥加密" class="headerlink" title="共享密钥加密"></a>共享密钥加密</h3><p>加密和解密都使用相同的密钥，也叫对称加密。</p>
+<p><strong>交互方式</strong><br><code>A生产共享密钥-&gt;A将P发送给B-&gt;A先将消息用P加密,然后发送给B-&gt;B收到消息后，采用密钥解密</code></p>
+<p><strong>优缺点</strong><br>A向B发送共享密钥时可能会被X窃听到，所以后面的密文X一样能看，还可以使用共享密钥篡改内容；如果A向B发送带着恶意发送消息，事后不认账，B也无法确认。所以窃听、冒充、篡改、事后否认都没有彻底解决，</p>
+<p><strong>应用场景</strong><br>凯撒密码、AES、DES、动态口令等实现了共享加密，其中AES应用最广。可以用在公司内部服务间的id加密。</p>
+<h3 id="公开密钥加密"><a href="#公开密钥加密" class="headerlink" title="公开密钥加密"></a>公开密钥加密</h3><p>加密和揭秘使用不同的密钥，也叫非对称加密</p>
+<p><strong>公开密钥加密算法条件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.可以使用某个数值对数据进行加密;</span><br><span class="line">2.使用另一个数值对加密数据进行计算可以让数据恢复原样;</span><br><span class="line">3.无法从一种密钥推算另一种密钥;</span><br></pre></td></tr></table></figure>
+
+<p><strong>交互方式</strong><br><code>B生产公开密钥PB和私有密钥SB-&gt;B将PB发送给A-&gt;A使用PB加密消息-&gt;A将密文发送给B-&gt;B收到消息后采用SB解密</code></p>
+<p><strong>优缺点</strong><br>1.加密和解密都比较耗时；<br>2.A无法判断公开密钥来自与B,可能是X替换后的PX,这就产生了中间人攻击，即假冒问题;</p>
+<p><strong>应用场景</strong><br>RAS算法</p>
+<h3 id="混合解密"><a href="#混合解密" class="headerlink" title="混合解密"></a>混合解密</h3><p>综合共享密钥解密和公开密钥加密</p>
+<p><strong>交互方式</strong><br><code>B生成公开密钥PB和私有密钥SB，A生产共享密钥P-&gt;B将PB发送给A-&gt;A将P采用PB加密，并发送给B-&gt;B收到消息后采用SB解密，得带共享密钥P-&gt;A使用P加密消息并将密文发送给B-&gt;B收到消息后采用P解密</code></p>
+<p><strong>优缺点</strong><br>1.解决了公开密钥耗时的问题；<br>2.增加了窃听、冒充的复杂程度，但是也没有完全解决共享加密的问题;</p>
+<p><strong>应用场景</strong><br>连接服务器的SSL协议</p>
+<h3 id="迪菲·赫尔曼密钥交换"><a href="#迪菲·赫尔曼密钥交换" class="headerlink" title="迪菲·赫尔曼密钥交换"></a>迪菲·赫尔曼密钥交换</h3><p>通过将双方共有的秘密数值隐藏在公开数值相关的运算中，来实现双方之间密钥的安全交换</p>
+<p><strong>算法条件</strong><br>前提：密钥P、S可以合成密钥P-S</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.无法把密钥单独取出来，即持有P、P-S也无法取出S；</span><br><span class="line">2.不管怎么合成而来的密钥，都可以与别的密钥继续合成新的密钥，如P与P-S继续可合成P-P-S；</span><br><span class="line">3.密钥合成结果与合成顺序无关，只与用了哪些密钥有关，如A-B-C与B-A-C一样；</span><br></pre></td></tr></table></figure>
+
+<p><strong>交互方式</strong><br><code>A生成密钥P并发送给B-&gt;A、B各自生产私有密钥SA、SB-&gt;A合成新密钥P-SA，B合成新密钥P-SB-&gt;A将密钥P-SA发送给B,B将P-SB发送给A-&gt;A将收到的P-SB与SA合成SA-P-SB，B将收到的P-SA与SB合成P-SA-SB-&gt;A与B通信将采用各自得到P-SA-SB加解密消息</code></p>
+<p><strong>优缺点</strong><br>完美解决了共享密钥无法安全传递的问题</p>
+<p><strong>应用场景</strong><br>暂未想到</p>
+<h3 id="消息认证码"><a href="#消息认证码" class="headerlink" title="消息认证码"></a>消息认证码</h3><p>发送消息带上Mac值，属于共享加密的一种</p>
+<p><strong>交互方式</strong><br><code>A、B采用迪菲·赫尔曼密钥交换方式得到共享密钥P-&gt;A使用密钥P和密文得到Mac值，并将密文和Mac一起发送给B-&gt;B收到消息后，使用密文和P校验Mac</code></p>
+<p><strong>优缺点</strong><br>可以解决消息篡改问题，但是没解决事后否认问题，A、B生成的Mac一样</p>
+<p><strong>应用场景</strong><br>计算MAC的算法有HMAC、OMAC、CMAC等，HMAC应用最广。猜测：苹果收的Mac地址</p>
+<h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3><p>使用类似公开密钥加密的方式生成数字签名，预防事后否认问题</p>
+<ul>
+<li>与公开密钥的区别<br>数字签名：有消息的发送者准备公开密钥、私有密钥；<br>公开密钥加密：消息接收方准备公开密钥、私有密钥；</li>
+</ul>
+<p><strong>交互方式</strong><br>A准备公开密钥PA，私有密钥SA-&gt;A将PA发送给B-&gt;A使用SA加密消息(即签名)-&gt;A将消息和签名发送给B-&gt;B收到消息后使用PA对签名解密-&gt;B对解密签名后的消息与收到的消息做确认</p>
+<p><strong>优缺点</strong><br>和公开密钥加密一样，耗时，无法确认公开密钥确实来自消息发送者；<br>预防了篡改和事后否认，但是没解决窃听的问题(X也可以使用公开密钥查看密文)、冒充；</p>
+<p><strong>应用场景</strong><br>RAS</p>
+<h3 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h3><p>增加认证中心解决公开密钥无法确认问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A准备公开密钥PA和私有密钥SA-&gt;A向认证中心申请发行证书，证明PA是自己的-&gt;认证中心有自己的PC、SC-&gt;A将PA和包含邮箱的个人资料发送给认证中心-&gt;认证中心收到资料进行确认，没问题使用SC和A的资料生成数字签名，并把生成的签名和资料放在一起(即数字证书)发送给A-&gt;A将证书作为公开密钥发送给B-&gt;B验证证书中的个人资料是否为A，B用PC验证证书是否为认证中心给出的-&gt;B使用PC解密证书中的签名，得带PA</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>加密算法按大的方向分：不可逆加密，对称加密，非对称加密。其他的都是为密钥的安全传输做的努力。如数字证书解决公开密钥无法确认的问题；数字签名解决事后否认的问题等等，在实际使用中，这些都需要综合在一起使用。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8A%A0%E5%AF%86/" rel="tag"># 加密</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/20/2019-10-20-github-jekyll%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="next" title="github+jekyll搭建博客">
+                  <i class="fa fa-chevron-left"></i> github+jekyll搭建博客
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么需要加密"><span class="nav-number">1.</span> <span class="nav-text">为什么需要加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加密算法分类"><span class="nav-number">2.</span> <span class="nav-text">加密算法分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希函数"><span class="nav-number">2.1.</span> <span class="nav-text">哈希函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享密钥加密"><span class="nav-number">2.2.</span> <span class="nav-text">共享密钥加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公开密钥加密"><span class="nav-number">2.3.</span> <span class="nav-text">公开密钥加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#混合解密"><span class="nav-number">2.4.</span> <span class="nav-text">混合解密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迪菲·赫尔曼密钥交换"><span class="nav-number">2.5.</span> <span class="nav-text">迪菲·赫尔曼密钥交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息认证码"><span class="nav-number">2.6.</span> <span class="nav-text">消息认证码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字签名"><span class="nav-number">2.7.</span> <span class="nav-text">数字签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字证书"><span class="nav-number">2.8.</span> <span class="nav-text">数字证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Mr.Li"
+    src="/images/myAvatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Li</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script><script src="/js/bookmark.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
