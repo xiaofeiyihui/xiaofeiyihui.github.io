@@ -50,28 +50,34 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="小飞一会">
-<meta property="og:url" content="https:&#x2F;&#x2F;xiaofeiyihui.github.io&#x2F;index.html">
+  <meta name="description" content="今天在win7上尝试着安装docker,由于初次接触，很多概念不是很懂，中间也遇到一些在windows系统中遇到的奇葩问题。 docker toolbox与docker desktop installer如何选择在官网上有的地方推荐docker desktop installer，又有人推荐docker toolbox，初次接触，该如何选择呢？ 12docker toolbox：docker针对w">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker安装遇到的坑">
+<meta property="og:url" content="https:&#x2F;&#x2F;xiaofeiyihui.github.io&#x2F;2019&#x2F;11&#x2F;25&#x2F;2019-11-25-docker%E5%AE%89%E8%A3%85%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91&#x2F;index.html">
 <meta property="og:site_name" content="小飞一会">
+<meta property="og:description" content="今天在win7上尝试着安装docker,由于初次接触，很多概念不是很懂，中间也遇到一些在windows系统中遇到的奇葩问题。 docker toolbox与docker desktop installer如何选择在官网上有的地方推荐docker desktop installer，又有人推荐docker toolbox，初次接触，该如何选择呢？ 12docker toolbox：docker针对w">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;xiaofeiyihui.github.io&#x2F;images&#x2F;docker&#x2F;1.png">
+<meta property="og:updated_time" content="2019-11-25T15:13:09.246Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;xiaofeiyihui.github.io&#x2F;images&#x2F;docker&#x2F;1.png">
 
-<link rel="canonical" href="https://xiaofeiyihui.github.io/">
+<link rel="canonical" href="https://xiaofeiyihui.github.io/2019/11/25/2019-11-25-docker%E5%AE%89%E8%A3%85%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>小飞一会</title>
+  <title>docker安装遇到的坑 | 小飞一会</title>
   
 
 
@@ -187,10 +193,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://xiaofeiyihui.github.io/2019/11/25/2019-11-25-docker%E5%AE%89%E8%A3%85%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -204,8 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/25/2019-11-25-docker%E5%AE%89%E8%A3%85%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" class="post-title-link" itemprop="url">docker安装遇到的坑</a>
+          docker安装遇到的坑
         </h1>
 
         <div class="post-meta">
@@ -241,7 +246,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>今天在win7上尝试着安装docker,由于初次接触，很多概念不是很懂，中间也遇到一些在windows系统中遇到的奇葩问题。</p>
+        <p>今天在win7上尝试着安装docker,由于初次接触，很多概念不是很懂，中间也遇到一些在windows系统中遇到的奇葩问题。</p>
 <h2 id="docker-toolbox与docker-desktop-installer如何选择"><a href="#docker-toolbox与docker-desktop-installer如何选择" class="headerlink" title="docker toolbox与docker desktop installer如何选择"></a>docker toolbox与docker desktop installer如何选择</h2><p>在官网上有的地方推荐docker desktop installer，又有人推荐docker toolbox，初次接触，该如何选择呢？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker toolbox：docker针对windows系统提供的自带虚拟机工具包,方便在win上使用;</span><br><span class="line">docker desktop installer ：针对win10的 hyper-v虚拟机提供的一种安装docker方式，如果系统不支持hyper-v 仍需采用docker  toolbox方式安装</span><br></pre></td></tr></table></figure>
 <ul>
@@ -260,350 +265,39 @@
 
 <h2 id="启动docker-quickstart-terminal显示-VBoxManage-exe-error-Details-code-E-FAIL-0x80004005-component-MachineWrap-interface-IMachine"><a href="#启动docker-quickstart-terminal显示-VBoxManage-exe-error-Details-code-E-FAIL-0x80004005-component-MachineWrap-interface-IMachine" class="headerlink" title="启动docker quickstart terminal显示  VBoxManage.exe: error: Details: code E_FAIL (0x80004005), component MachineWrap, interface IMachine"></a>启动docker quickstart terminal显示  VBoxManage.exe: error: Details: code E_FAIL (0x80004005), component MachineWrap, interface IMachine</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">解决方法一：</span><br><span class="line">卸载掉docker Toolbox以及VirtualBox，重新安装后这个问题就可以解决了，这个方法10%的成功率。</span><br><span class="line"></span><br><span class="line">解决方法二：</span><br><span class="line">卸载掉VirtualBox，然后从https://www.virtualbox.org/wiki/Downloads 更新最新版本安装，安装完成后再启动docker的客户端。</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"># docker</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xiaofeiyihui.github.io/2019/11/25/2019-11-25-%E4%B8%8D%E5%8F%AF%E4%B8%8D%E7%9F%A5%E7%9A%84%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/myAvatar.jpg">
-      <meta itemprop="name" content="Mr.Li">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小飞一会">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/25/2019-11-25-%E4%B8%8D%E5%8F%AF%E4%B8%8D%E7%9F%A5%E7%9A%84%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">不可不知的加密算法</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-11-25 17:45:00 / 修改时间：22:54:01" itemprop="dateCreated datePublished" datetime="2019-11-25T17:45:00+08:00">2019-11-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8A%A0%E5%AF%86/" itemprop="url" rel="index">
-                    <span itemprop="name">加密</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近在看《我的第一本算法书》，准备写点数据结构与算法系列博客。看完后感觉加密算法也很有意思，于是就有了这篇文章。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/25/2019-11-25-%E4%B8%8D%E5%8F%AF%E4%B8%8D%E7%9F%A5%E7%9A%84%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/25/2019-11-25-%E4%B8%8D%E5%8F%AF%E4%B8%8D%E7%9F%A5%E7%9A%84%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" rel="next" title="不可不知的加密算法">
+                  <i class="fa fa-chevron-left"></i> 不可不知的加密算法
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+            <span class="post-nav-divider"></span>
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xiaofeiyihui.github.io/2019/10/20/2019-10-20-github-jekyll%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/myAvatar.jpg">
-      <meta itemprop="name" content="Mr.Li">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小飞一会">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/20/2019-10-20-github-jekyll%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">github+jekyll搭建博客</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-20 15:37:38" itemprop="dateCreated datePublished" datetime="2019-10-20T15:37:38+08:00">2019-10-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-25 23:11:50" itemprop="dateModified" datetime="2019-11-25T23:11:50+08:00">2019-11-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">手记</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前几天采用<a href="https://xiaofeiyihui.github.io/2019/10/13/2019-10-13-hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/#more">github+hexo搭建博客</a>搭建了自己的第一个博客，整个过程还挺顺利的。这两天又试了一下github+jekyll的方式搭建博客。整个过程，怎么一个心塞了得…………<br>不过最终结果还是很愉快的，nice!!!</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/20/2019-10-20-github-jekyll%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+            <div class="post-nav-prev post-nav-item">
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
+          </div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xiaofeiyihui.github.io/2019/10/19/2019-10-19-%E7%AB%9F%E7%84%B6%E4%B8%8D%E7%9F%A5%E9%81%93VPC%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%9F%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/myAvatar.jpg">
-      <meta itemprop="name" content="Mr.Li">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小飞一会">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/19/2019-10-19-%E7%AB%9F%E7%84%B6%E4%B8%8D%E7%9F%A5%E9%81%93VPC%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%9F%EF%BC%9F/" class="post-title-link" itemprop="url">竟然不知道VPC是什么？？？</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-19 15:22:59" itemprop="dateCreated datePublished" datetime="2019-10-19T15:22:59+08:00">2019-10-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-05 17:05:25" itemprop="dateModified" datetime="2019-11-05T17:05:25+08:00">2019-11-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">手记</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近公司在做将服务从现有的经典网络模式迁移到vpc上，而我竟然对vpc一点概念都没有，于是在网上一顿百度猛虎如。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/19/2019-10-19-%E7%AB%9F%E7%84%B6%E4%B8%8D%E7%9F%A5%E9%81%93VPC%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%9F%EF%BC%9F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xiaofeiyihui.github.io/2019/10/13/2019-10-13-hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/myAvatar.jpg">
-      <meta itemprop="name" content="Mr.Li">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小飞一会">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/13/2019-10-13-hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">git+hexo搭建博客</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-13 00:00:00" itemprop="dateCreated datePublished" datetime="2019-10-13T00:00:00+08:00">2019-10-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-20 15:39:31" itemprop="dateModified" datetime="2019-10-20T15:39:31+08:00">2019-10-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%89%8B%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">手记</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>这是我的第一篇博客，主要想简单记录一下自己搭建博客过程.博客搭建采用git+hexo方式，当然也有git+jekyll,我还没有尝试过这个，后续会去试试。下面简单介绍一下git+hexo搭建步骤。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/13/2019-10-13-hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -632,6 +326,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-toolbox与docker-desktop-installer如何选择"><span class="nav-number">1.</span> <span class="nav-text">docker toolbox与docker desktop installer如何选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动docker-quickstart-terminal显示windows正在查找bash-exe"><span class="nav-number">2.</span> <span class="nav-text">启动docker quickstart terminal显示windows正在查找bash.exe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动docker-quickstart-terminal显示vboxmanage-exe-error-failed-to-create-the-virtualBox-object"><span class="nav-number">3.</span> <span class="nav-text">启动docker quickstart terminal显示vboxmanage.exe:error: failed to create the virtualBox object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载boot2docker-iso太慢"><span class="nav-number">4.</span> <span class="nav-text">下载boot2docker.iso太慢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动docker-quickstart-terminal显示-VBoxManage-exe-error-Details-code-E-FAIL-0x80004005-component-MachineWrap-interface-IMachine"><span class="nav-number">5.</span> <span class="nav-text">启动docker quickstart terminal显示  VBoxManage.exe: error: Details: code E_FAIL (0x80004005), component MachineWrap, interface IMachine</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
