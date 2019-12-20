@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="最近一直在想着写博客，但是在github上面访问速度很慢，于是就在gitee上面也维护了一份相同的博客内容，这样就面临一个问题，电脑本地的项目怎么才能既推到github上面也能推到gitee上面？？？？下面就来给各位介绍一波骚操作。">
+<meta name="keywords" content="git,tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不可不会的git骚操作">
+<meta property="og:url" content="https:&#x2F;&#x2F;xiaofeiyihui.github.io&#x2F;2019&#x2F;12&#x2F;20&#x2F;2019-12-20-%E4%B8%8D%E5%8F%AF%E4%B8%8D%E4%BC%9A%E7%9A%84git%E9%AA%9A%E6%93%8D%E4%BD%9C&#x2F;index.html">
+<meta property="og:site_name" content="小飞一会">
+<meta property="og:description" content="最近一直在想着写博客，但是在github上面访问速度很慢，于是就在gitee上面也维护了一份相同的博客内容，这样就面临一个问题，电脑本地的项目怎么才能既推到github上面也能推到gitee上面？？？？下面就来给各位介绍一波骚操作。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-20T15:09:04.547Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://xiaofeiyihui.github.io/2019/12/20/2019-12-20-%E4%B8%8D%E5%8F%AF%E4%B8%8D%E4%BC%9A%E7%9A%84git%E9%AA%9A%E6%93%8D%E4%BD%9C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>不可不会的git骚操作 | 小飞一会</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小飞一会</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一步一步往前走</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/xiaofeiyihui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xiaofeiyihui.github.io/2019/12/20/2019-12-20-%E4%B8%8D%E5%8F%AF%E4%B8%8D%E4%BC%9A%E7%9A%84git%E9%AA%9A%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/myAvatar.jpg">
+      <meta itemprop="name" content="Mr.Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小飞一会">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          不可不会的git骚操作
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-20 08:03:24 / 修改时间：23:09:04" itemprop="dateCreated datePublished" datetime="2019-12-20T08:03:24+08:00">2019-12-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tool/" itemprop="url" rel="index">
+                    <span itemprop="name">tool</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近一直在想着写博客，但是在github上面访问速度很慢，于是就在gitee上面也维护了一份相同的博客内容，这样就面临一个问题，电脑本地的项目怎么才能既推到github上面也能推到gitee上面？？？？下面就来给各位介绍一波骚操作。</p>
+<a id="more"></a>
+
+<h3 id="1-将项目推倒github或者gitee"><a href="#1-将项目推倒github或者gitee" class="headerlink" title="1.将项目推倒github或者gitee"></a>1.将项目推倒github或者gitee</h3><p>这一步很简单，你在github/gitee新建一个项目，会给你提示操作，按着提示操作即可。</p>
+<h4 id="在gitee上面的提示"><a href="#在gitee上面的提示" class="headerlink" title="在gitee上面的提示"></a>在gitee上面的提示</h4><h5 id="Git-全局设置"><a href="#Git-全局设置" class="headerlink" title="Git 全局设置:"></a>Git 全局设置:</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name "用户名"</span><br><span class="line">git config --global user.email "邮箱"</span><br></pre></td></tr></table></figure>
+
+<h5 id="创建-git-仓库"><a href="#创建-git-仓库" class="headerlink" title="创建 git 仓库:"></a>创建 git 仓库:</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir test</span><br><span class="line">cd test</span><br><span class="line">   git init</span><br><span class="line">   touch README.md</span><br><span class="line">   git add README.md</span><br><span class="line">   git commit -m "first commit"</span><br><span class="line">   git remote add origin https://gitee.com/用户名/test.git</span><br><span class="line">   git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<h5 id="已有仓库"><a href="#已有仓库" class="headerlink" title="已有仓库?"></a>已有仓库?</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd existing_git_repo</span><br><span class="line">git remote add origin https://gitee.com/用户名/test.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<h4 id="在github上的提示"><a href="#在github上的提示" class="headerlink" title="在github上的提示"></a>在github上的提示</h4><h5 id="create-a-new-repository-on-the-command-line"><a href="#create-a-new-repository-on-the-command-line" class="headerlink" title="create a new repository on the command line"></a>create a new repository on the command line</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo "# test" &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m "first commit"</span><br><span class="line">git remote add origin https://github.com/用户名/test.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<h5 id="push-an-existing-repository-from-the-command-line"><a href="#push-an-existing-repository-from-the-command-line" class="headerlink" title="push an existing repository from the command line"></a>push an existing repository from the command line</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/用户名/test.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<h5 id="import-code-from-another-repository"><a href="#import-code-from-another-repository" class="headerlink" title="import code from another repository"></a>import code from another repository</h5><p>You can initialize this repository with code from a Subversion, Mercurial, or TFS project.</p>
+<h3 id="2-将项目推倒另一个仓库"><a href="#2-将项目推倒另一个仓库" class="headerlink" title="2.将项目推倒另一个仓库"></a>2.将项目推倒另一个仓库</h3><h4 id="a-查看当前项目的远程仓库地址"><a href="#a-查看当前项目的远程仓库地址" class="headerlink" title="a.查看当前项目的远程仓库地址"></a>a.查看当前项目的远程仓库地址</h4><p>这一步可以省略，这里只是想在做东西之前，做一下检查。这里以先推倒github为例。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git remote -v</span></span><br><span class="line">origin  https://github.com/用户名/test.git (fetch)</span><br><span class="line">origin  https://github.com/用户名/test.git (push)</span><br></pre></td></tr></table></figure>
+
+<h4 id="b-添加另一个远程仓库"><a href="#b-添加另一个远程仓库" class="headerlink" title="b.添加另一个远程仓库"></a>b.添加另一个远程仓库</h4><h5 id="方式一：命令式"><a href="#方式一：命令式" class="headerlink" title="方式一：命令式"></a>方式一：命令式</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add gitee  gitee项目地址</span><br></pre></td></tr></table></figure>
+
+<h5 id="方式二：手动添加"><a href="#方式二：手动添加" class="headerlink" title="方式二：手动添加"></a>方式二：手动添加</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[remote &quot;gitee&quot;]</span><br><span class="line">	url = gitee项目地址        </span><br><span class="line">	fetch = +refs/heads/*:refs/remotes/gitee/*</span><br><span class="line">	tagopt = --no-tags</span><br></pre></td></tr></table></figure>
+<p>如果添加错了或者不想这样操作，可以使用下面命令删除，或者在config中手动删除</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm gitee</span><br></pre></td></tr></table></figure>
+
+<h4 id="c-再次查看远程仓库信息"><a href="#c-再次查看远程仓库信息" class="headerlink" title="c.再次查看远程仓库信息"></a>c.再次查看远程仓库信息</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git remote -v</span></span><br><span class="line">gitee   https://gitee.com/用户名/test.git (fetch)</span><br><span class="line">gitee   https://gitee.com/用户名/test.git (push)</span><br><span class="line">origin  https://github.com/用户名/test.git (fetch)</span><br><span class="line">origin  https://github.com/用户名/test.git (push)</span><br></pre></td></tr></table></figure>
+
+<h4 id="d-提交到新添加的远程仓库"><a href="#d-提交到新添加的远程仓库" class="headerlink" title="d.提交到新添加的远程仓库"></a>d.提交到新添加的远程仓库</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u gitee</span><br></pre></td></tr></table></figure>
+<p>执行上面命令后，在自己的远程仓库会发现，项目已经被推送上去。</p>
+<p>后续提交需要注意使用下面不同的脚本推送到不同的远程仓库。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin</span><br><span class="line">git push -u gitee</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-将项目一次推到多个仓库"><a href="#3-将项目一次推到多个仓库" class="headerlink" title="3.将项目一次推到多个仓库"></a>3.将项目一次推到多个仓库</h3><p>如你所见，上面的方式我们需要推送两次，那么能不能推送一次就可以同时推送到githu和gitee呢，答案是当然可以</p>
+<h4 id="方式一：手动添加"><a href="#方式一：手动添加" class="headerlink" title="方式一：手动添加"></a>方式一：手动添加</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//在config文件中添加</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">  url = 原有的git项目地址</span><br><span class="line">  fetch = +refs/heads/*:refs/remotes/origin/*</span><br><span class="line">  url = 新增的gitee项目地址</span><br></pre></td></tr></table></figure>
+
+<h4 id="方式二：命令添加"><a href="#方式二：命令添加" class="headerlink" title="方式二：命令添加"></a>方式二：命令添加</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url --add origin gitee项目地址</span><br></pre></td></tr></table></figure>
+
+<p>这个时候是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">origin  https://github.com/xiaofeiyihui/myblog.git (fetch)</span><br><span class="line">origin  https://github.com/xiaofeiyihui/myblog.git (push)</span><br><span class="line">origin  https://gitee.com/xiaofeiyihui/myblog.git (push)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-对比一次提交与两次提交"><a href="#4-对比一次提交与两次提交" class="headerlink" title="4.对比一次提交与两次提交"></a>4.对比一次提交与两次提交</h3><p>以上两种配置乍一看，配置3好像比配置2方便很多，少了一次push不是，其实不然，两种配置的不同还体现在pll代码上，配置2可以选择任一仓库进行pll，而配置3却默认只能从config中的第一个url内的仓库pull代码。pull代码的话配置2更方便，push代码的话配置3更方便。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>如果只是push操作，可以选用3；<br>如果涉及到pull操作，建议选用2.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/tool/" rel="tag"># tool</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/12/10/2019-12-10-hashMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="next" title="数据结构与算法之开山篇：hashmap数据结构及源码分析">
+                  <i class="fa fa-chevron-left"></i> 数据结构与算法之开山篇：hashmap数据结构及源码分析
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-将项目推倒github或者gitee"><span class="nav-number">1.</span> <span class="nav-text">1.将项目推倒github或者gitee</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在gitee上面的提示"><span class="nav-number">1.1.</span> <span class="nav-text">在gitee上面的提示</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Git-全局设置"><span class="nav-number">1.1.1.</span> <span class="nav-text">Git 全局设置:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建-git-仓库"><span class="nav-number">1.1.2.</span> <span class="nav-text">创建 git 仓库:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#已有仓库"><span class="nav-number">1.1.3.</span> <span class="nav-text">已有仓库?</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在github上的提示"><span class="nav-number">1.2.</span> <span class="nav-text">在github上的提示</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#create-a-new-repository-on-the-command-line"><span class="nav-number">1.2.1.</span> <span class="nav-text">create a new repository on the command line</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#push-an-existing-repository-from-the-command-line"><span class="nav-number">1.2.2.</span> <span class="nav-text">push an existing repository from the command line</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#import-code-from-another-repository"><span class="nav-number">1.2.3.</span> <span class="nav-text">import code from another repository</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-将项目推倒另一个仓库"><span class="nav-number">2.</span> <span class="nav-text">2.将项目推倒另一个仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-查看当前项目的远程仓库地址"><span class="nav-number">2.1.</span> <span class="nav-text">a.查看当前项目的远程仓库地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-添加另一个远程仓库"><span class="nav-number">2.2.</span> <span class="nav-text">b.添加另一个远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方式一：命令式"><span class="nav-number">2.2.1.</span> <span class="nav-text">方式一：命令式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方式二：手动添加"><span class="nav-number">2.2.2.</span> <span class="nav-text">方式二：手动添加</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-再次查看远程仓库信息"><span class="nav-number">2.3.</span> <span class="nav-text">c.再次查看远程仓库信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#d-提交到新添加的远程仓库"><span class="nav-number">2.4.</span> <span class="nav-text">d.提交到新添加的远程仓库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-将项目一次推到多个仓库"><span class="nav-number">3.</span> <span class="nav-text">3.将项目一次推到多个仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方式一：手动添加"><span class="nav-number">3.1.</span> <span class="nav-text">方式一：手动添加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方式二：命令添加"><span class="nav-number">3.2.</span> <span class="nav-text">方式二：命令添加</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-对比一次提交与两次提交"><span class="nav-number">4.</span> <span class="nav-text">4.对比一次提交与两次提交</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">4.1.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Mr.Li"
+    src="/images/myAvatar.jpg">
+  <p class="site-author-name" itemprop="name">Mr.Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Li</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script><script src="/js/bookmark.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
